@@ -76,6 +76,7 @@ export const portfolioData = {
     portraitImage: "/assets/faizan/faizan-portrait.jpg",
     logoImage: "/assets/faizan/alnibras-logo.jpg",
     bannerImage: "/assets/faizan/alnibras-banner.jpg",
+    resumePdf: "/assets/faizan/Faizan_Gillani_Resume.pdf",
     bio: "Syed Muhammad Faizan Gillani is the Founder and CEO of Al Nibras Group — an organisation dedicated to education and entrepreneurship, based in Lahore, Pakistan. His mission is simple and bold: give every ambitious student the guidance, skills and network to turn ideas into ventures.",
     extendedBio: "Under his leadership, Al Nibras Group works at the meeting point of mentorship, training, and startup incubation — building solutions, creating impact and changing lives. As a Full-Stack Developer and Head of ANG Digital Agency, Faizan also architects production web apps, mobile systems, and autonomous agentic workflows for global clients.",
     tagline: "From idea to execution — building tomorrow's entrepreneurs today. Empowering students across Pakistan to innovate, inspire and create real impact.",

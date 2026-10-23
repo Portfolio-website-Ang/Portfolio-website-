@@ -14,6 +14,7 @@ import { Footer } from './components/Footer';
 import { StoryReelModal } from './components/StoryReelModal';
 import { ProjectModal } from './components/ProjectModal';
 import { ProfileSwitcherModal } from './components/ProfileSwitcherModal';
+import { ResumeResourceModal } from './components/ResumeResourceModal';
 import { portfolioData, ProjectItem, OriginalItem, ViewerProfile } from './data/portfolio';
 
 export default function App() {
@@ -22,6 +23,13 @@ export default function App() {
   const [isStoryModalOpen, setIsStoryModalOpen] = useState(false);
   const [activeModalItem, setActiveModalItem] = useState<ProjectItem | OriginalItem | null>(null);
   const [isProfileSwitcherOpen, setIsProfileSwitcherOpen] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [resumeModalTab, setResumeModalTab] = useState<'resume' | 'students'>('resume');
+
+  const handleOpenResumeModal = (tab: 'resume' | 'students' = 'resume') => {
+    setResumeModalTab(tab);
+    setIsResumeModalOpen(true);
+  };
 
   return (
     <div className="relative min-h-screen bg-[#0a0612] text-[#f7f4ee] font-sans selection:bg-[#e50914] selection:text-white">
@@ -40,6 +48,7 @@ export default function App() {
         onOpenStory={() => setIsStoryModalOpen(true)}
         onOpenProfileSwitcher={() => setIsProfileSwitcherOpen(true)}
         activeProfileName={activeProfile.name}
+        onOpenResumeModal={handleOpenResumeModal}
       />
 
       {/* Main Streaming Feed */}
@@ -63,7 +72,7 @@ export default function App() {
         <AgencyServicesSection />
 
         {/* Full-width Cinematic Banner */}
-        <BannerSection />
+        <BannerSection onOpenStudentHub={() => handleOpenResumeModal('students')} />
 
         {/* Final Episode: Contact & Inquiry Form */}
         <ContactSection />
@@ -90,6 +99,13 @@ export default function App() {
         onClose={() => setIsProfileSwitcherOpen(false)}
         activeProfileId={activeProfile.id}
         onSelectProfile={(p) => setActiveProfile(p)}
+      />
+
+      {/* Resume & Student Entrepreneur Resources Hub Modal */}
+      <ResumeResourceModal
+        isOpen={isResumeModalOpen}
+        onClose={() => setIsResumeModalOpen(false)}
+        defaultTab={resumeModalTab}
       />
     </div>
   );

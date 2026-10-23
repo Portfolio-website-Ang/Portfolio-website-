@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Play, Users, MessageSquare } from 'lucide-react';
+import { Menu, X, Play, Users, MessageSquare, Download } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
 
 interface NavbarProps {
   onOpenStory: () => void;
   onOpenProfileSwitcher: () => void;
   activeProfileName: string;
+  onOpenResumeModal: (tab?: 'resume' | 'students') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenStory,
   onOpenProfileSwitcher,
-  activeProfileName
+  activeProfileName,
+  onOpenResumeModal,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -73,11 +75,31 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Action Zone */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* Resume & Resource Hub */}
+          <div className="hidden sm:flex items-center gap-1.5">
+            <button
+              onClick={() => onOpenResumeModal('resume')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#e5b452] hover:text-[#f4d48a] bg-[#e5b452]/10 hover:bg-[#e5b452]/20 border border-[#e5b452]/30 hover:border-[#e5b452]/60 rounded-md transition-all shadow-sm whitespace-nowrap cursor-pointer"
+              title="View & Download Resume (PDF)"
+            >
+              <Download className="w-3.5 h-3.5 text-[#e5b452]" />
+              <span>Resume</span>
+            </button>
+            <button
+              onClick={() => onOpenResumeModal('students')}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-white/85 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-md transition-all whitespace-nowrap cursor-pointer"
+              title="Student Entrepreneur Guides & Incubation Frameworks"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#e5b452] animate-pulse" />
+              <span>Student Hub</span>
+            </button>
+          </div>
+
           {/* Story Reel Button */}
           <button
             onClick={onOpenStory}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#f7f4ee] bg-white/10 hover:bg-white/20 rounded-md transition-all border border-white/10"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#f7f4ee] bg-white/10 hover:bg-white/20 rounded-md transition-all border border-white/10"
             title="Play Highlight Reel"
           >
             <Play className="w-3.5 h-3.5 fill-current text-[#e50914]" />
@@ -95,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               alt=""
               className="w-5 h-5 rounded-full object-cover ring-1 ring-[#e5b452]"
             />
-            <span className="hidden md:inline text-[11px] font-sans truncate max-w-[100px]">
+            <span className="hidden xl:inline text-[11px] font-sans truncate max-w-[100px]">
               {activeProfileName}
             </span>
             <Users className="w-3.5 h-3.5 text-[#e5b452]" />
@@ -104,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Direct Contact Button */}
           <a
             href="#contact"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-[#e50914] hover:bg-[#c20811] rounded-md transition-all shadow-brand whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-white bg-[#e50914] hover:bg-[#c20811] rounded-md transition-all shadow-brand whitespace-nowrap"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Inquire</span>
@@ -135,6 +157,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           ))}
           <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenResumeModal('resume');
+              }}
+              className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-[#e5b452] bg-[#e5b452]/10 hover:bg-[#e5b452]/20 border border-[#e5b452]/30 rounded-md transition-colors cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5 text-[#e5b452]" />
+              <span>Download Resume (PDF)</span>
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenResumeModal('students');
+              }}
+              className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-[#e50914]/40 to-[#e5b452]/30 border border-white/10 rounded-md transition-colors cursor-pointer"
+            >
+              <span>🚀 Student Entrepreneur Hub</span>
+            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
