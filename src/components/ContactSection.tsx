@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Send, CheckCircle2, Linkedin, Facebook, Globe, Mail, Sparkles } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 export const ContactSection: React.FC = () => {
   const [form, setForm] = useState({ name: '', email: '', details: '' });
@@ -60,6 +61,7 @@ export const ContactSection: React.FC = () => {
           <div className="absolute -inset-2 rounded-full bg-[#e5b452] opacity-30 blur-lg animate-pulse" />
           <img
             src={portfolioData.profile.logoImage}
+            onError={(e) => handleImageError(e, 'assets/faizan/alnibras-logo.jpg')}
             alt="Al Nibras Group"
             className="relative mx-auto h-24 w-24 rounded-full object-cover border-2 border-[#e5b452]/40 shadow-glow"
           />

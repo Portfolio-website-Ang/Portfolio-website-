@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp, Heart } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -14,6 +15,7 @@ export const Footer: React.FC = () => {
         <div className="flex items-center gap-3">
           <img
             src={portfolioData.profile.logoImage}
+            onError={(e) => handleImageError(e, 'assets/faizan/alnibras-logo.jpg')}
             alt="Al Nibras Group"
             className="w-6 h-6 rounded-full object-cover ring-1 ring-[#e5b452]/40"
           />

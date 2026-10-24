@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Play, Info, Sparkles, MapPin, Award } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface HeroBillboardProps {
   onPlayStory: () => void;
@@ -19,6 +20,7 @@ export const HeroBillboard: React.FC<HeroBillboardProps> = ({ onPlayStory }) => 
       >
         <img
           src={portfolioData.profile.heroImage}
+          onError={(e) => handleImageError(e, 'assets/faizan/faizan-hero.jpg')}
           alt={portfolioData.profile.name}
           className="h-full w-full object-cover object-[75%_25%] md:left-auto md:w-[68%] md:ml-auto"
         />
@@ -84,10 +86,14 @@ export const HeroBillboard: React.FC<HeroBillboardProps> = ({ onPlayStory }) => 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <button
               onClick={onPlayStory}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#0a0612] hover:bg-[#e5b452] hover:text-[#0a0612] font-semibold text-sm rounded-md transition-all duration-200 shadow-xl cursor-pointer"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#0a0612] hover:bg-[#e5b452] hover:text-[#0a0612] font-semibold text-sm rounded-md transition-all duration-200 shadow-xl cursor-pointer"
+              title="Play highlight reel (or press Space key)"
             >
-              <Play className="w-4 h-4 fill-current text-[#e50914]" />
-              <span>▶ Play Story</span>
+              <Play className="w-4 h-4 fill-current text-[#e50914] group-hover:scale-110 transition-transform" />
+              <span>Play Story</span>
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-black/10 text-[10px] font-mono font-bold tracking-tight text-[#0a0612]/70 group-hover:bg-[#0a0612]/15">
+                Space
+              </kbd>
             </button>
 
             <a

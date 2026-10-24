@@ -2,17 +2,19 @@ import React, { useRef } from 'react';
 import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, Sparkles, Flame } from 'lucide-react';
 import { portfolioData, OriginalItem } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface OriginalsRailProps {
   onSelectOriginal: (original: OriginalItem) => void;
+  focusedIndex?: number | null;
 }
 
-export const OriginalsRail: React.FC<OriginalsRailProps> = ({ onSelectOriginal }) => {
+export const OriginalsRail: React.FC<OriginalsRailProps> = ({ onSelectOriginal, focusedIndex }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -320 : 320;
+      const scrollAmount = direction === 'left' ? -340 : 340;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -34,19 +36,24 @@ export const OriginalsRail: React.FC<OriginalsRailProps> = ({ onSelectOriginal }
             </h2>
           </div>
 
-          {/* Desktop Rail Scroll Buttons */}
+          {/* Desktop Rail Scroll Buttons & Keyboard Hints */}
           <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[10px] font-mono text-[#9e9aa8] mr-1 hidden md:inline">
+              Use keys <kbd className="px-1 py-0.5 rounded bg-white/10 text-[#e5b452] font-mono">←</kbd> <kbd className="px-1 py-0.5 rounded bg-white/10 text-[#e5b452] font-mono">→</kbd>
+            </span>
             <button
               onClick={() => scroll('left')}
-              className="p-2 rounded-full border border-white/10 hover:border-white/30 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 transition-colors"
-              aria-label="Previous originals"
+              className="p-2 rounded-full border border-white/10 hover:border-white/30 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 transition-colors cursor-pointer"
+              aria-label="Previous originals (Left Arrow)"
+              title="Scroll Left (← Arrow Key)"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="p-2 rounded-full border border-white/10 hover:border-white/30 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 transition-colors"
-              aria-label="Next originals"
+              className="p-2 rounded-full border border-white/10 hover:border-white/30 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 transition-colors cursor-pointer"
+              aria-label="Next originals (Right Arrow)"
+              title="Scroll Right (→ Arrow Key)"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -55,19 +62,32 @@ export const OriginalsRail: React.FC<OriginalsRailProps> = ({ onSelectOriginal }
 
         {/* Horizontal Snap Rail */}
         <div
+          id="originals-rail-container"
           ref={scrollRef}
           className="no-scrollbar flex snap-x gap-5 overflow-x-auto pb-4 scroll-smooth"
         >
-          {portfolioData.originals.map((original, idx) => (
-            <motion.article
-              key={original.id}
-              whileHover={{ y: -6, scale: 1.02 }}
-              onClick={() => onSelectOriginal(original)}
-              className="group relative h-84 w-68 sm:w-72 shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 bg-[#130d1e] shadow-xl cursor-pointer"
-            >
+          {portfolioData.originals.map((original, idx) => {
+            const isFocused = focusedIndex === idx;
+            return (
+              <motion.article
+                key={original.id}
+                id={`original-card-${idx}`}
+                tabIndex={0}
+                whileHover={{ y: -6, scale: 1.02 }}
+                onClick={() => onSelectOriginal(original)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') onSelectOriginal(original);
+                }}
+                className={`group relative h-84 w-68 sm:w-72 shrink-0 snap-start overflow-hidden rounded-2xl border transition-all duration-300 bg-[#130d1e] shadow-xl cursor-pointer ${
+                  isFocused
+                    ? 'border-[#e50914] ring-2 ring-[#e50914] shadow-glow scale-[1.02]'
+                    : 'border-white/10 hover:border-white/30'
+                }`}
+              >
               {/* Background Art */}
               <img
                 src={portfolioData.profile.bannerImage}
+                onError={(e) => handleImageError(e, 'assets/faizan/alnibras-banner.jpg')}
                 alt={original.title}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
@@ -109,7 +129,8 @@ export const OriginalsRail: React.FC<OriginalsRailProps> = ({ onSelectOriginal }
                 </div>
               </div>
             </motion.article>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

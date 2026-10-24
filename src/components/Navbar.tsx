@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Play, Users, MessageSquare, Download } from 'lucide-react';
+import { Menu, X, Play, Users, MessageSquare, Download, Keyboard } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface NavbarProps {
   onOpenStory: () => void;
   onOpenProfileSwitcher: () => void;
   activeProfileName: string;
   onOpenResumeModal: (tab?: 'resume' | 'students') => void;
+  onOpenShortcutsGuide: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -14,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenProfileSwitcher,
   activeProfileName,
   onOpenResumeModal,
+  onOpenShortcutsGuide,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -114,6 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <img
               src={portfolioData.profile.logoImage}
+              onError={(e) => handleImageError(e, 'assets/faizan/alnibras-logo.jpg')}
               alt=""
               className="w-5 h-5 rounded-full object-cover ring-1 ring-[#e5b452]"
             />
@@ -121,6 +125,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               {activeProfileName}
             </span>
             <Users className="w-3.5 h-3.5 text-[#e5b452]" />
+          </button>
+
+          {/* Shortcuts Remote Button */}
+          <button
+            onClick={onOpenShortcutsGuide}
+            className="hidden lg:flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono text-[#9e9aa8] hover:text-white rounded-md transition-colors border border-white/5 hover:border-white/20 bg-white/5 cursor-pointer"
+            title="Keyboard Shortcuts Remote (Press ? key)"
+          >
+            <Keyboard className="w-3.5 h-3.5 text-[#e5b452]" />
+            <span className="font-bold">?</span>
           </button>
 
           {/* Direct Contact Button */}
@@ -185,6 +199,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Play className="w-3.5 h-3.5 fill-current text-[#e50914]" />
               <span>▶ Play Story Reel</span>
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenShortcutsGuide();
+              }}
+              className="flex items-center justify-center gap-2 py-2 text-xs font-mono text-[#9e9aa8] hover:text-[#e5b452] transition-colors"
+            >
+              <Keyboard className="w-3.5 h-3.5 text-[#e5b452]" />
+              <span>Streaming Remote &amp; Shortcuts (?)</span>
             </button>
           </div>
         </div>

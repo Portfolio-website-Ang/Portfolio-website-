@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Play, Volume2, VolumeX, FastForward } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface OpeningSequenceProps {
   onComplete: () => void;
@@ -72,6 +73,7 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onComplete }) 
               <div className="absolute -inset-4 rounded-full bg-[#e5b452] opacity-25 blur-xl animate-pulse" />
               <img
                 src={portfolioData.profile.logoImage}
+                onError={(e) => handleImageError(e, 'assets/faizan/alnibras-logo.jpg')}
                 alt="Al Nibras Group"
                 className="relative w-36 h-36 sm:w-48 sm:h-48 rounded-full object-cover border-2 border-[#e5b452]/40 shadow-glow"
               />
@@ -126,6 +128,7 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onComplete }) 
             <div className="relative mb-6">
               <img
                 src={portfolioData.profile.portraitImage}
+                onError={(e) => handleImageError(e, 'assets/faizan/faizan-portrait.jpg')}
                 alt={portfolioData.profile.name}
                 className="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-[#e50914] shadow-brand"
               />

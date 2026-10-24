@@ -1,3 +1,5 @@
+import { getAssetUrl } from '../utils/assets';
+
 export interface ProjectItem {
   id: string;
   title: string;
@@ -72,11 +74,11 @@ export const portfolioData = {
     officialEmail: "contact@alnibras.pk",
     originalLabel: "AN AL NIBRAS ORIGINAL",
     seriesBadge: "THE SERIES",
-    heroImage: "/assets/faizan/faizan-hero.jpg",
-    portraitImage: "/assets/faizan/faizan-portrait.jpg",
-    logoImage: "/assets/faizan/alnibras-logo.jpg",
-    bannerImage: "/assets/faizan/alnibras-banner.jpg",
-    resumePdf: "/assets/faizan/Faizan_Gillani_Resume.pdf",
+    heroImage: getAssetUrl('assets/faizan/faizan-hero.jpg'),
+    portraitImage: getAssetUrl('assets/faizan/faizan-portrait.jpg'),
+    logoImage: getAssetUrl('assets/faizan/alnibras-logo.jpg'),
+    bannerImage: getAssetUrl('assets/faizan/alnibras-banner.jpg'),
+    resumePdf: getAssetUrl('assets/faizan/Faizan_Gillani_Resume.pdf'),
     bio: "Syed Muhammad Faizan Gillani is the Founder and CEO of Al Nibras Group — an organisation dedicated to education and entrepreneurship, based in Lahore, Pakistan. His mission is simple and bold: give every ambitious student the guidance, skills and network to turn ideas into ventures.",
     extendedBio: "Under his leadership, Al Nibras Group works at the meeting point of mentorship, training, and startup incubation — building solutions, creating impact and changing lives. As a Full-Stack Developer and Head of ANG Digital Agency, Faizan also architects production web apps, mobile systems, and autonomous agentic workflows for global clients.",
     tagline: "From idea to execution — building tomorrow's entrepreneurs today. Empowering students across Pakistan to innovate, inspire and create real impact.",
@@ -148,7 +150,7 @@ export const portfolioData = {
       genre: "Education",
       description: "Programs that help students discover their potential and lead with purpose.",
       impactMetrics: "1,000+ Students Engaged across Pakistan",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "startup-incubation",
@@ -156,7 +158,7 @@ export const portfolioData = {
       genre: "Entrepreneurship",
       description: "Guiding early ideas through validation, planning and launch.",
       impactMetrics: "Zero-to-One Launch Framework",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "business-development",
@@ -164,7 +166,7 @@ export const portfolioData = {
       genre: "Growth",
       description: "Practical strategy and partnerships for ventures ready to scale.",
       impactMetrics: "Sustainable Market-Ready Roadmaps",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "mentorship-training",
@@ -172,7 +174,7 @@ export const portfolioData = {
       genre: "Leadership",
       description: "Workshops and one-on-one guidance from people who have built before.",
       impactMetrics: "Practical Hands-on Bootcamps",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "sustainable-growth",
@@ -180,7 +182,7 @@ export const portfolioData = {
       genre: "Impact",
       description: "Long-term thinking that keeps ventures and communities thriving.",
       impactMetrics: "Ethical & Sharia-Aligned Foundation",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     }
   ] as OriginalItem[],
 
@@ -201,7 +203,7 @@ export const portfolioData = {
         "Gamified Islamic financial literacy courses",
         "Zero-interest halal savings simulator"
       ],
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "al-nibras-group",
@@ -219,7 +221,7 @@ export const portfolioData = {
         "High-performance animated hero with lightweight asset loading",
         "Direct student inquiry and mentorship booking pipeline"
       ],
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "syed-ejaz-gillani",
@@ -237,7 +239,7 @@ export const portfolioData = {
         "Interactive book preview modals and purchasing routing",
         "Photo gallery with responsive lightbox zoom"
       ],
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: "umrah-ride-buddy",
@@ -255,7 +257,7 @@ export const portfolioData = {
         "Multilingual interface with WhatsApp dispatch automation",
         "Mobile-first reservation funnel with instant verification"
       ],
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     }
   ] as ProjectItem[],
 
@@ -330,7 +332,7 @@ export const portfolioData = {
       subtitle: "Degrees teach theory. True growth requires a launchpad.",
       highlightText: "Founded in Lahore, Al Nibras Group was created with a decisive mission: empower young students across Pakistan with practical entrepreneurship, tech skills, and early venture incubation.",
       quote: "Every ambitious student deserves the guidance, network, and tools to turn ideas into living ventures.",
-      image: "/assets/faizan/faizan-portrait.jpg"
+      image: getAssetUrl('assets/faizan/faizan-portrait.jpg')
     },
     {
       id: 2,
@@ -339,7 +341,7 @@ export const portfolioData = {
       subtitle: "Innovate · Empower · Execute · Elevate",
       highlightText: "Through structured bootcamps, masterclasses, and one-on-one mentorship, Al Nibras Group guides students from conceptual ideation to customer validation and pitch readiness.",
       quote: "We don't just teach leadership — we practice it by building real solutions that solve community problems.",
-      image: "/assets/faizan/alnibras-logo.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-logo.jpg')
     },
     {
       id: 3,
@@ -348,7 +350,7 @@ export const portfolioData = {
       subtitle: "Full-Stack Web, Mobile & Agentic Workflows",
       highlightText: "As Technical Director of ANG Agency, Faizan architects enterprise web solutions, mobile applications, and AI agent pipelines for global clients, combining aesthetic elegance with bulletproof stability.",
       quote: "Great software isn't just code; it is a clear expression of purpose, speed, and usability.",
-      image: "/assets/faizan/faizan-hero.jpg"
+      image: getAssetUrl('assets/faizan/faizan-hero.jpg')
     },
     {
       id: 4,
@@ -357,7 +359,7 @@ export const portfolioData = {
       subtitle: "From Sharia-compliant fintech to international logistics.",
       highlightText: "Proudly delivered Al Nibras Finance (0% interest halal family banking), Syed Ejaz literary portal, Umrah Ride Buddy transport dispatch, and the corporate Al Nibras pipeline.",
       quote: "Real builders are judged by what they ship and the value they create for real humans.",
-      image: "/assets/faizan/alnibras-banner.jpg"
+      image: getAssetUrl('assets/faizan/alnibras-banner.jpg')
     },
     {
       id: 5,
@@ -366,7 +368,7 @@ export const portfolioData = {
       subtitle: "Partnerships, Client Projects & Incubation Cohorts",
       highlightText: "Whether you represent an academic institution, seek agency engineering for your startup, or want to sponsor youth empowerment in Pakistan, the door is open.",
       quote: "The next season starts today.",
-      image: "/assets/faizan/faizan-portrait.jpg"
+      image: getAssetUrl('assets/faizan/faizan-portrait.jpg')
     }
   ] as StorySlide[],
 

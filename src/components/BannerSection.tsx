@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface BannerSectionProps {
   onOpenStudentHub?: () => void;
@@ -19,6 +20,7 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ onOpenStudentHub }
       >
         <img
           src={portfolioData.profile.bannerImage}
+          onError={(e) => handleImageError(e, 'assets/faizan/alnibras-banner.jpg')}
           alt="Al Nibras Group — empowering students across Pakistan"
           loading="lazy"
           className="w-full h-72 sm:h-80 md:h-96 object-cover object-center brightness-90 hover:scale-102 transition-transform duration-700"

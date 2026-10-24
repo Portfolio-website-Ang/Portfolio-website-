@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Lightbulb, Users, Compass, TrendingUp, CheckCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 export const AboutSection: React.FC = () => {
   const pillarIcons: Record<string, React.ReactNode> = {
@@ -26,6 +27,7 @@ export const AboutSection: React.FC = () => {
           <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#130d1e] shadow-2xl">
             <img
               src={portfolioData.profile.portraitImage}
+              onError={(e) => handleImageError(e, 'assets/faizan/faizan-portrait.jpg')}
               alt={portfolioData.profile.name}
               loading="lazy"
               className="w-full aspect-square sm:aspect-[4/5] object-cover object-top hover:scale-102 transition-transform duration-700"

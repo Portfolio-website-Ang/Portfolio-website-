@@ -1,22 +1,32 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Layers, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { X, ExternalLink, Layers, CheckCircle2, ShieldCheck, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ProjectItem, OriginalItem } from '../data/portfolio';
+import { getAssetUrl, handleImageError } from '../utils/assets';
 
 interface ProjectModalProps {
   item: ProjectItem | OriginalItem | null;
   onClose: () => void;
+  onNavigate?: (direction: 'prev' | 'next') => void;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({ item, onClose }) => {
+export const ProjectModal: React.FC<ProjectModalProps> = ({ item, onClose, onNavigate }) => {
   useEffect(() => {
     if (!item) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft' && onNavigate) {
+        e.preventDefault();
+        onNavigate('prev');
+      }
+      if (e.key === 'ArrowRight' && onNavigate) {
+        e.preventDefault();
+        onNavigate('next');
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [item, onClose]);
+  }, [item, onClose, onNavigate]);
 
   if (!item) return null;
 
@@ -40,7 +50,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ item, onClose }) => 
         {/* Header Media Banner */}
         <div className="relative h-44 sm:h-52 w-full bg-[#0a0612] shrink-0 overflow-hidden">
           <img
-            src={item.image || '/assets/faizan/alnibras-banner.jpg'}
+            src={getAssetUrl(item.image || 'assets/faizan/alnibras-banner.jpg')}
+            onError={(e) => handleImageError(e, 'assets/faizan/alnibras-banner.jpg')}
             alt={item.title}
             className="w-full h-full object-cover brightness-60"
           />
@@ -138,20 +149,45 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ item, onClose }) => 
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="p-5 sm:p-6 border-t border-white/10 bg-black/40 flex items-center justify-between gap-4">
-          <button
-            onClick={onClose}
-            className="px-5 py-2.5 text-xs font-semibold text-[#9e9aa8] hover:text-white transition-colors"
-          >
-            Close
-          </button>
+        <div className="p-5 sm:p-6 border-t border-white/10 bg-black/40 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-xs font-semibold text-[#9e9aa8] hover:text-white transition-colors cursor-pointer"
+            >
+              Close <span className="text-[10px] opacity-60 font-mono">(Esc)</span>
+            </button>
+
+            {onNavigate && (
+              <div className="flex items-center gap-1.5 ml-2 border-l border-white/10 pl-3">
+                <button
+                  onClick={() => onNavigate('prev')}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-xs text-[#9e9aa8] hover:text-white transition-colors cursor-pointer"
+                  title="Previous Project (← Arrow)"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Prev</span>
+                  <kbd className="px-1 py-0.5 rounded bg-black/40 text-[10px] font-mono text-[#e5b452]">←</kbd>
+                </button>
+                <button
+                  onClick={() => onNavigate('next')}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-xs text-[#9e9aa8] hover:text-white transition-colors cursor-pointer"
+                  title="Next Project (→ Arrow)"
+                >
+                  <span className="hidden sm:inline">Next</span>
+                  <kbd className="px-1 py-0.5 rounded bg-black/40 text-[10px] font-mono text-[#e5b452]">→</kbd>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+          </div>
 
           {project && (
             <a
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-[#e50914] hover:bg-[#c20811] text-white font-semibold text-xs sm:text-sm transition-all shadow-brand"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#e50914] hover:bg-[#c20811] text-white font-semibold text-xs sm:text-sm transition-all shadow-brand cursor-pointer"
             >
               <span>▶ Launch Application</span>
               <ExternalLink className="w-4 h-4" />
@@ -159,6 +195,34 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ item, onClose }) => 
           )}
         </div>
       </motion.div>
+
+      {/* Floating Side Chevrons for Desktop */}
+      {onNavigate && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onNavigate('prev');
+            }}
+            className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full items-center justify-center bg-black/70 hover:bg-black/90 border border-white/15 text-white/70 hover:text-white shadow-2xl transition-all hover:scale-110 cursor-pointer"
+            aria-label="Previous project"
+            title="Previous (← Left Arrow)"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onNavigate('next');
+            }}
+            className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full items-center justify-center bg-black/70 hover:bg-black/90 border border-white/15 text-white/70 hover:text-white shadow-2xl transition-all hover:scale-110 cursor-pointer"
+            aria-label="Next project"
+            title="Next (→ Right Arrow)"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </>
+      )}
     </div>
   );
 };

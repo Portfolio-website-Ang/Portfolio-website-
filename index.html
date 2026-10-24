@@ -8,10 +8,17 @@
     <meta name="theme-color" content="#0e0a14" />
     <meta property="og:title" content="Syed Muhammad Faizan Gillani — The Series" />
     <meta property="og:description" content="Founder &amp; CEO, Al Nibras Group. Innovate · Inspire · Impact." />
-    <meta property="og:image" content="/assets/faizan/faizan-hero.jpg" />
+    <meta property="og:image" content="./assets/faizan/faizan-hero.jpg" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/jpeg" href="/assets/faizan/alnibras-logo.jpg" />
+    <link rel="icon" type="image/jpeg" href="./assets/faizan/alnibras-logo.jpg" />
+    <script>
+      // Ensure trailing slash on GitHub Pages so relative resources load cleanly
+      if (location.hostname.endsWith('github.io') && location.pathname && !location.pathname.endsWith('/')) {
+        var normalized = location.protocol + '//' + location.host + location.pathname + '/' + location.search + location.hash;
+        window.history.replaceState(null, '', normalized);
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />

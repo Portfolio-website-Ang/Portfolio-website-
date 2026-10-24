@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Pause, Play, ChevronLeft, ChevronRight, Quote, Sparkles } from 'lucide-react';
 import { portfolioData, StorySlide } from '../data/portfolio';
+import { handleImageError } from '../utils/assets';
 
 interface StoryReelModalProps {
   isOpen: boolean;
@@ -132,6 +133,7 @@ export const StoryReelModal: React.FC<StoryReelModalProps> = ({ isOpen, onClose 
           <div className="flex items-center gap-2.5">
             <img
               src={portfolioData.profile.logoImage}
+              onError={(e) => handleImageError(e, 'assets/faizan/alnibras-logo.jpg')}
               alt=""
               className="w-7 h-7 rounded-full object-cover ring-1 ring-[#e5b452]"
             />
@@ -183,6 +185,7 @@ export const StoryReelModal: React.FC<StoryReelModalProps> = ({ isOpen, onClose 
             >
               <img
                 src={currentSlide.image || portfolioData.profile.heroImage}
+                onError={(e) => handleImageError(e, 'assets/faizan/faizan-portrait.jpg')}
                 alt={currentSlide.title}
                 className="w-full h-full object-cover object-center filter brightness-[0.4]"
               />
